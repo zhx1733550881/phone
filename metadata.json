@@ -1,0 +1,6 @@
+{
+  "name": "移动套餐与宽带办理中心",
+  "description": "提供千兆宽带、大流量卡、芒果校园卡等多种超值套餐的在线预约与申请服务，1比1还原设计稿，包含详细套餐对比及快捷预约通道。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
