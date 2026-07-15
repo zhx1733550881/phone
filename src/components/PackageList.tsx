@@ -1,6 +1,12 @@
 import React from 'react';
 import { Package, PackageId } from '../types';
-import { Wifi, ShieldAlert, Smartphone, Tv, Zap, Phone, Heart, Users, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+
+import traffic29Img from '../assets/images/traffic_29_card_1784086401272.jpg';
+import mango29Img from '../assets/images/mango_29_card_1784086417416.jpg';
+import broadband39Img from '../assets/images/broadband_39_card_1784086432618.jpg';
+import broadband360Img from '../assets/images/broadband_360_card_1784086447519.jpg';
+import broadband600Img from '../assets/images/broadband_600_card_1784086462224.jpg';
 
 interface PackageListProps {
   packages: Package[];
@@ -8,90 +14,25 @@ interface PackageListProps {
 }
 
 export default function PackageList({ packages, onSelect }: PackageListProps) {
-  // Map package icons dynamically based on ID
-  const getPackageIcon = (id: PackageId) => {
+  const getPackageImage = (id: PackageId) => {
     switch (id) {
-      case 'traffic_29':
-        return (
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-red-500 flex items-center justify-center text-white shadow-md relative shrink-0">
-            <Smartphone className="w-6 h-6 animate-pulse" />
-            <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-red-600 rounded-full border-2 border-white flex items-center justify-center text-[8px] font-bold">G</span>
-          </div>
-        );
-      case 'mango_29':
-        return (
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center text-white shadow-md relative shrink-0">
-            <Tv className="w-6 h-6" />
-            <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-orange-600 rounded-full border-2 border-white flex items-center justify-center text-[8px] font-bold">M</span>
-          </div>
-        );
-      case 'broadband_39':
-        return (
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white shadow-md relative shrink-0">
-            <Wifi className="w-6 h-6" />
-            <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-blue-600 rounded-full border-2 border-white flex items-center justify-center text-[8px] font-bold">W</span>
-          </div>
-        );
-      case 'broadband_360':
-        return (
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white shadow-md relative shrink-0">
-            <ShieldAlert className="w-6 h-6" />
-            <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-emerald-600 rounded-full border-2 border-white flex items-center justify-center text-[8px] font-bold">S</span>
-          </div>
-        );
-      case 'broadband_600':
-        return (
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white shadow-md relative shrink-0">
-            <Zap className="w-6 h-6" />
-            <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-purple-600 rounded-full border-2 border-white flex items-center justify-center text-[8px] font-bold">K</span>
-          </div>
-        );
-      default:
-        return (
-          <div className="w-12 h-12 rounded-2xl bg-gray-500 flex items-center justify-center text-white shrink-0">
-            <Wifi className="w-6 h-6" />
-          </div>
-        );
-    }
-  };
-
-  // Map card custom classes
-  const getCardStyleClasses = (id: PackageId) => {
-    switch (id) {
-      case 'traffic_29':
-        return 'bg-gradient-to-r from-red-50/70 to-orange-50/30 hover:shadow-red-100/50 border-red-100/80 hover:border-red-300';
-      case 'mango_29':
-        return 'bg-gradient-to-r from-orange-50/70 to-amber-50/30 hover:shadow-orange-100/50 border-orange-100/80 hover:border-orange-300';
-      case 'broadband_39':
-        return 'bg-gradient-to-r from-blue-50/70 to-cyan-50/30 hover:shadow-blue-100/50 border-blue-100/80 hover:border-blue-300';
-      case 'broadband_360':
-        return 'bg-gradient-to-r from-emerald-50/70 to-teal-50/30 hover:shadow-emerald-100/50 border-emerald-100/80 hover:border-emerald-300';
-      case 'broadband_600':
-        return 'bg-gradient-to-r from-purple-50/70 to-indigo-50/30 hover:shadow-purple-100/50 border-purple-100/80 hover:border-purple-300';
-      default:
-        return 'bg-gray-50 hover:shadow-gray-100 border-gray-100 hover:border-gray-300';
+      case 'traffic_29': return traffic29Img;
+      case 'mango_29': return mango29Img;
+      case 'broadband_39': return broadband39Img;
+      case 'broadband_360': return broadband360Img;
+      case 'broadband_600': return broadband600Img;
+      default: return broadband39Img;
     }
   };
 
   const getButtonBgClass = (id: PackageId) => {
     switch (id) {
-      case 'traffic_29': return 'bg-red-500 hover:bg-red-600 shadow-red-100/50 hover:shadow-lg hover:shadow-red-200 text-white';
-      case 'mango_29': return 'bg-orange-500 hover:bg-orange-600 shadow-orange-100/50 hover:shadow-lg hover:shadow-orange-200 text-white';
-      case 'broadband_39': return 'bg-blue-600 hover:bg-blue-700 shadow-blue-100/50 hover:shadow-lg hover:shadow-blue-200 text-white';
-      case 'broadband_360': return 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-100/50 hover:shadow-lg hover:shadow-emerald-200 text-white';
-      case 'broadband_600': return 'bg-purple-600 hover:bg-purple-700 shadow-purple-100/50 hover:shadow-lg hover:shadow-purple-200 text-white';
+      case 'traffic_29': return 'bg-orange-500 hover:bg-orange-600 text-white';
+      case 'mango_29': return 'bg-amber-500 hover:bg-amber-600 text-white';
+      case 'broadband_39': return 'bg-blue-600 hover:bg-blue-700 text-white';
+      case 'broadband_360': return 'bg-emerald-600 hover:bg-emerald-700 text-white';
+      case 'broadband_600': return 'bg-purple-600 hover:bg-purple-700 text-white';
       default: return 'bg-indigo-600 text-white';
-    }
-  };
-
-  const getBadgeStyle = (id: PackageId) => {
-    switch (id) {
-      case 'traffic_29': return 'bg-red-100 text-red-700';
-      case 'mango_29': return 'bg-orange-100 text-orange-700';
-      case 'broadband_39': return 'bg-blue-100 text-blue-700';
-      case 'broadband_360': return 'bg-emerald-100 text-emerald-700';
-      case 'broadband_600': return 'bg-purple-100 text-purple-700';
-      default: return 'bg-gray-100 text-gray-700';
     }
   };
 
@@ -136,60 +77,61 @@ export default function PackageList({ packages, onSelect }: PackageListProps) {
             <div
               key={pkg.id}
               onClick={() => onSelect(pkg.id)}
-              className={`border rounded-3xl p-4 sm:p-5 transition-all duration-300 flex flex-col justify-between cursor-pointer group hover:shadow-xl hover:translate-y-[-2px] ${getCardStyleClasses(pkg.id)}`}
+              className="relative w-full aspect-[2/1] sm:aspect-[16/7.5] rounded-3xl overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 border border-gray-100 cursor-pointer group"
             >
-              <div className="flex items-start gap-4">
-                {/* Custom Left Icon matching package */}
-                {getPackageIcon(pkg.id)}
+              {/* Background image covering card */}
+              <img
+                src={getPackageImage(pkg.id)}
+                alt={pkg.name}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
 
-                <div className="space-y-1 flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="font-bold text-sm sm:text-base text-gray-800 group-hover:text-gray-900 transition-colors truncate">
-                      {pkg.name}
-                    </h3>
-                    <span className={`text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider ${getBadgeStyle(pkg.id)}`}>
-                      {pkg.badge}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-500 font-medium truncate">{pkg.subName}</p>
+              {/* Dark Gradient Overlay for text contrast */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent flex flex-col justify-between p-4 sm:p-5" />
+
+              {/* Foreground content layout */}
+              <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-5 z-10 text-white">
+                {/* Top Row: Badges */}
+                <div className="flex items-center gap-2">
+                  <span className="text-[9px] font-black px-2 py-0.5 bg-white/25 border border-white/20 rounded-full text-white uppercase tracking-wider">
+                    {pkg.badge}
+                  </span>
+                  <span className="text-[9px] font-bold text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                    官方通道
+                  </span>
                 </div>
-              </div>
 
-              {/* Bottom Specs and Actions details bar */}
-              <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
-                <div className="flex items-center gap-3 text-[11px] font-bold text-gray-600">
-                  <div className="flex items-center gap-1 bg-white px-2 py-1 rounded-lg border border-gray-100 shadow-2xs">
-                    <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                    <span>{pkg.specs.voice}</span>
-                  </div>
-                  <div className="flex items-center gap-1 bg-white px-2 py-1 rounded-lg border border-gray-100 shadow-2xs">
-                    <Wifi className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                    <span>{pkg.specs.data}</span>
-                  </div>
-                  {pkg.specs.other && (
-                    <div className="flex items-center gap-1 bg-white px-2 py-1 rounded-lg border border-gray-100 shadow-2xs">
-                      <Heart className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                      <span className="truncate max-w-[80px]">{pkg.specs.other}</span>
+                {/* Middle Row: Name & Description */}
+                <div className="space-y-0.5 my-auto">
+                  <h3 className="text-base sm:text-lg font-black text-white tracking-tight drop-shadow-sm">
+                    {pkg.name}
+                  </h3>
+                  <p className="text-[10px] sm:text-xs text-gray-200 font-medium opacity-95 truncate max-w-[240px] sm:max-w-[340px]">
+                    {pkg.subName}
+                  </p>
+                </div>
+
+                {/* Bottom Row: Price & Select Action Button */}
+                <div className="flex items-end justify-between mt-auto">
+                  <div className="text-left">
+                    <span className="text-[9px] text-gray-300 font-bold block mb-0.5">预估月均资费</span>
+                    <div className="flex items-baseline gap-0.5">
+                      <span className="text-lg sm:text-xl font-black text-white leading-none">{pkg.price}</span>
+                      <span className="text-[10px] text-gray-300 font-bold">/{pkg.period}</span>
                     </div>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-3 shrink-0 ml-auto mt-2 sm:mt-0">
-                  <div className="text-right">
-                    <span className="text-xs text-gray-400 font-bold">月均 </span>
-                    <span className="text-lg font-black text-gray-900">{pkg.price}</span>
-                    <span className="text-[10px] text-gray-400 font-semibold">/{pkg.period}</span>
                   </div>
+
                   <button
                     type="button"
-                    className={`py-2 px-4 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition-all cursor-pointer ${getButtonBgClass(pkg.id)}`}
+                    className={`py-1.5 px-3.5 rounded-xl text-xs font-black flex items-center gap-1 transition-all shadow-md transform hover:scale-[1.03] active:scale-95 cursor-pointer ${getButtonBgClass(pkg.id)}`}
                   >
                     立即办理
-                    <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="w-3 h-3" />
                   </button>
                 </div>
-              </div>
 
+              </div>
             </div>
           ))}
         </div>
