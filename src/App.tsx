@@ -12,6 +12,7 @@ import TrafficCard39 from './components/TrafficCard39';
 import Broadband360 from './components/Broadband360';
 import Broadband600 from './components/Broadband600';
 import SuccessModal from './components/SuccessModal';
+import emailjs from '@emailjs/browser';
 
 const INITIAL_PACKAGES: Package[] = [
   {
@@ -82,12 +83,40 @@ export default function App() {
   // Success Modal States
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [formData, setFormData] = useState<ApplicationForm | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const selectedPackage = INITIAL_PACKAGES.find(pkg => pkg.id === activePackageId);
 
-  const handleSubmitForm = (data: ApplicationForm) => {
-    setFormData(data);
-    setIsSuccessOpen(true);
+  const handleSubmitForm = async (data: ApplicationForm) => {
+    if (!selectedPackage) return;
+    setIsSubmitting(true);
+
+    const templateParams = {
+      plan: selectedPackage.name,
+      name: data.name,
+      phone: data.phone,
+      province: data.province,
+      city: data.city,
+      district: data.district,
+      detail: data.detailAddress,
+      remark: data.remarks || '无',
+      time: new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
+    };
+
+    try {
+      await emailjs.send(
+        'service_i7qvn1d',
+        'template_n8umnid',
+        templateParams,
+        'OjEznu_yB2tIAkCwZ'
+      );
+    } catch (error) {
+      console.error('EmailJS error:', error);
+    } finally {
+      setIsSubmitting(false);
+      setFormData(data);
+      setIsSuccessOpen(true);
+    }
   };
 
   const handleSelectPackage = (id: PackageId) => {
@@ -163,6 +192,19 @@ export default function App() {
           formData={formData}
           selectedPackage={selectedPackage}
         />
+      )}
+
+      {/* EmailJS Submitting Glassmorphism Overlay */}
+      {isSubmitting && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/65 backdrop-blur-xs">
+          <div className="bg-white rounded-3xl p-6 max-w-xs w-full text-center space-y-4 shadow-2xl border border-gray-100 flex flex-col items-center">
+            <div className="w-12 h-12 rounded-full border-4 border-indigo-100 border-t-indigo-600 animate-spin"></div>
+            <div className="space-y-1">
+              <h4 className="font-bold text-gray-800 text-sm">正在提交申请...</h4>
+              <p className="text-xs text-gray-400">正在为您打通专属安装通道并派单，请稍候</p>
+            </div>
+          </div>
+        </div>
       )}
 
     </div>
